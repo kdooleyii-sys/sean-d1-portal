@@ -2,69 +2,246 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f172a">
+<meta name="robots" content="noindex, nofollow">
 <title>Sean Dooley — D1 Baseball Recruiting Portal</title>
 <style>
   :root {
     --navy-dark: #0f172a;
     --navy-primary: #1e3a8a;
     --blue-accent: #2563eb;
+    --blue-light: #eff6ff;
     --gold-accent: #d97706;
     --gold-light: #fef3c7;
     --green-accent: #16a34a;
+    --green-light: #dcfce7;
     --bg-main: #f8fafc;
+    --card-bg: #ffffff;
     --border: #cbd5e1;
     --text-dark: #0f172a;
     --text-muted: #64748b;
   }
-  html, body { width: 100%; min-height: 100vh; margin: 0; padding: 0; background-color: var(--bg-main); color: var(--text-dark); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
   * { box-sizing: border-box; }
-  .app-container { width: 100%; max-width: 1200px; margin: 0 auto; min-height: 1400px; padding-bottom: 50px; }
-  .hero-header { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #fff; padding: 20px 16px; }
-  .player-title h1 { font-size: 22px; font-weight: 800; margin: 0 0 4px 0; color: #fff; }
-  .player-title p { margin: 0; font-size: 13px; color: #93c5fd; }
-  .hero-badge { display: inline-block; margin-top: 10px; background: var(--gold-accent); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
-  .stat-ribbon { background: #1e293b; padding: 12px 16px; border-bottom: 3px solid var(--blue-accent); }
-  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; }
-  .stat-item { background: rgba(255,255,255,0.08); padding: 8px; border-radius: 6px; text-align: center; }
+
+  .app-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 1400px;
+    padding-bottom: 50px;
+  }
+
+  .hero-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 20px 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .player-title h1 {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 0 4px 0;
+    letter-spacing: -0.3px;
+    color: #ffffff;
+  }
+
+  .player-title p {
+    margin: 0;
+    font-size: 13px;
+    color: #93c5fd;
+    font-weight: 500;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--gold-accent);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .stat-ribbon {
+    background: #1e293b;
+    padding: 12px 16px;
+    border-bottom: 3px solid var(--blue-accent);
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+  }
+
+  .stat-item {
+    background: rgba(255,255,255,0.08);
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+  }
+
   .stat-val { font-size: 16px; font-weight: 800; color: #38bdf8; }
-  .stat-lbl { font-size: 10px; text-transform: uppercase; color: #cbd5e1; font-weight: 600; }
-  .nav-tabs-wrapper { background: #fff; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; }
-  .nav-tabs { display: flex; overflow-x: auto; padding: 8px 12px; gap: 8px; }
-  .tab-btn { padding: 10px 16px; background: #f1f5f9; border: 1px solid var(--border); border-radius: 20px; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; white-space: nowrap; }
-  .tab-btn.active { background: var(--navy-primary); color: #fff; border-color: var(--navy-primary); }
+  .stat-lbl { font-size: 10px; text-transform: uppercase; color: #cbd5e1; font-weight: 600; margin-top: 2px; }
+
+  .nav-tabs-wrapper {
+    background: #ffffff;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-tabs {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .nav-tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 10px 16px;
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    min-height: 40px;
+  }
+
+  .tab-btn.active {
+    background: var(--navy-primary);
+    color: #ffffff;
+    border-color: var(--navy-primary);
+  }
+
   .content-body { padding: 16px; }
   .tab-pane { display: none; }
   .tab-pane.active { display: block; }
-  select, input[type="number"], textarea { font-size: 16px !important; border: 1px solid var(--border); border-radius: 8px; padding: 10px; width: 100%; background: #fff; }
-  .compare-controls { background: #fff; padding: 16px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px; }
+
+  select, input[type="number"], textarea {
+    font-size: 16px !important;
+    font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    width: 100%;
+    background-color: #ffffff;
+    color: var(--text-dark);
+  }
+
+  select:focus, input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--blue-accent);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  }
+
+  .compare-controls {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .compare-controls h2 { font-size: 16px; margin: 0 0 12px 0; color: var(--navy-dark); }
+  .select-group { margin-bottom: 12px; }
+  .select-group:last-child { margin-bottom: 0; }
+  .select-group label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+
   .compare-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
   @media (min-width: 768px) { .compare-grid { grid-template-columns: 1fr 1fr; } }
-  .school-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .card-header { padding: 14px 16px; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: #fff; }
+
+  .school-card { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .card-header { padding: 14px 16px; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: #ffffff; }
+  .card-header h3 { font-size: 18px; font-weight: 800; margin: 0 0 4px 0; }
+  .conf-pill { display: inline-block; background: rgba(255,255,255,0.25); padding: 3px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+
   .card-body { padding: 14px 16px; }
-  .metric-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
-  .table-box { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; margin-bottom: 16px; }
+  .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-label { font-weight: 600; color: var(--text-muted); }
+  .metric-val { font-weight: 700; color: var(--text-dark); text-align: right; }
+
+  .table-box { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 16px; }
   table { width: 100%; min-width: 650px; border-collapse: collapse; font-size: 13px; }
-  th { background: var(--navy-dark); color: #fff; padding: 10px 12px; text-align: left; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  .comment-item { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
-  .comment-author { font-size: 12px; font-weight: 700; color: var(--navy-primary); display: flex; justify-content: space-between; }
-  .btn-primary { background: var(--navy-primary); color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: 700; width: 100%; cursor: pointer; }
+  th { background: var(--navy-dark); color: #ffffff; padding: 10px 12px; font-weight: 700; text-align: left; white-space: nowrap; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:nth-child(even) { background-color: #f8fafc; }
+
+  .formula-banner { background: var(--gold-light); border-left: 4px solid var(--gold-accent); padding: 12px 14px; border-radius: 6px; margin-bottom: 16px; font-size: 12px; color: #78350f; }
+
+  .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 700; }
+  .badge-tier-a { background: var(--gold-light); color: #92400e; }
+  .badge-tier-b { background: var(--green-light); color: #166534; }
+  .badge-tier-c { background: #f1f5f9; color: #475569; }
+
+  .checklist-card { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .checklist-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-item input[type="checkbox"] { width: 22px; height: 22px; margin-top: 1px; accent-color: var(--blue-accent); flex-shrink: 0; }
+
+  .comment-item { background: #ffffff; border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+  .comment-author { font-size: 12px; font-weight: 700; color: var(--navy-primary); display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .comment-date { color: var(--text-muted); font-weight: 500; font-size: 10px; }
+
+  .btn-primary { background: var(--navy-primary); color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 700; font-size: 14px; width: 100%; cursor: pointer; min-height: 44px; }
+  .btn-primary:active { background: #0f172a; }
+
+  .sync-indicator { font-size: 11px; color: #93c5fd; margin-top: 4px; display: flex; align-items: center; gap: 6px; }
+  .sync-dot { width: 8px; height: 8px; background-color: #22c55e; border-radius: 50%; display: inline-block; }
 </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="app-container" style="min-height: 1400px; padding-bottom: 50px;">
+  <!-- Hero Header -->
   <div class="hero-header">
     <div class="player-title">
       <h1>Sean Dooley — D1 Portal</h1>
       <p>JUCO RHP | Class of 2027 | 94 MPH / 2,200+ RPM</p>
-      <div style="font-size:11px; color:#93c5fd; margin-top:4px;">● Connected to Master Google Sheet</div>
+      <div class="sync-indicator"><span class="sync-dot" id="syncDot"></span> <span id="syncStatus">Connected to Master Google Sheet</span></div>
     </div>
     <div class="hero-badge">⚾ 9 Active D1 Programs • Kansas Official Oct 23</div>
   </div>
 
+  <!-- Quick Stat Ribbon -->
   <div class="stat-ribbon">
     <div class="stat-grid">
       <div class="stat-item"><div class="stat-val">94 MPH</div><div class="stat-lbl">Top Velo</div></div>
@@ -74,76 +251,237 @@
     </div>
   </div>
 
+  <!-- Touch-Friendly Sticky Tabs -->
   <div class="nav-tabs-wrapper">
     <div class="nav-tabs">
       <button class="tab-btn active" onclick="switchTab(event, 'compare')">1. Comparison</button>
       <button class="tab-btn" onclick="switchTab(event, 'calc')">2. Financial Calculator</button>
       <button class="tab-btn" onclick="switchTab(event, 'scorecard')">3. Scorecard</button>
       <button class="tab-btn" onclick="switchTab(event, 'tiers')">4. Roster Tiers</button>
-      <button class="tab-btn" onclick="switchTab(event, 'comments')">5. Parent Notes</button>
+      <button class="tab-btn" onclick="switchTab(event, 'checklist')">5. Visit Checklist</button>
+      <button class="tab-btn" onclick="switchTab(event, 'comments')">6. Parent Notes</button>
     </div>
   </div>
 
   <div class="content-body">
+    <!-- TAB 1: SIDE-BY-SIDE COMPARISON -->
     <div id="compare" class="tab-pane active">
       <div class="compare-controls">
-        <label><strong>School #1:</strong></label>
-        <select id="schoolSelect1" onchange="updateComparison()"><option value="Kansas">Kansas (Big 12)</option><option value="WKU">WKU (C-USA)</option></select>
-        <label style="margin-top:8px; display:block;"><strong>School #2:</strong></label>
-        <select id="schoolSelect2" onchange="updateComparison()"><option value="WKU">WKU (C-USA)</option><option value="Kansas">Kansas (Big 12)</option></select>
+        <h2>Head-to-Head College Comparison</h2>
+        <div class="select-group">
+          <label>School #1:</label>
+          <select id="schoolSelect1" onchange="updateComparison()">
+            <option value="Kansas" selected>Kansas (Big 12)</option>
+            <option value="High Point">High Point (Big South)</option>
+            <option value="WKU">Western Kentucky (C-USA)</option>
+            <option value="Arizona">Arizona (Big 12)</option>
+            <option value="UCF">UCF (Big 12)</option>
+            <option value="Indiana">Indiana (Big Ten)</option>
+            <option value="Kent State">Kent State (MAC)</option>
+            <option value="New Mexico State">New Mexico State (C-USA)</option>
+            <option value="Penn State">Penn State (Big Ten)</option>
+          </select>
+        </div>
+        <div class="select-group">
+          <label>School #2:</label>
+          <select id="schoolSelect2" onchange="updateComparison()">
+            <option value="Kansas">Kansas (Big 12)</option>
+            <option value="High Point" selected>High Point (Big South)</option>
+            <option value="WKU">Western Kentucky (C-USA)</option>
+            <option value="Arizona">Arizona (Big 12)</option>
+            <option value="UCF">UCF (Big 12)</option>
+            <option value="Indiana">Indiana (Big Ten)</option>
+            <option value="Kent State">Kent State (MAC)</option>
+            <option value="New Mexico State">New Mexico State (C-USA)</option>
+            <option value="Penn State">Penn State (Big Ten)</option>
+          </select>
+        </div>
       </div>
+
       <div class="compare-grid">
         <div class="school-card" id="card1"></div>
         <div class="school-card" id="card2"></div>
       </div>
     </div>
 
+    <!-- TAB 2: FINANCIAL CALCULATOR -->
     <div id="calc" class="tab-pane">
+      <div class="formula-banner">
+        <strong>Net Out-of-Pocket Cost Formula:</strong><br>
+        <code>Net = (Tuition + Room + Fees) - (Athletic + Academic + Direct + NIL)</code>
+      </div>
       <div class="table-box">
         <table id="finTable">
-          <thead><tr><th>School</th><th>Tuition</th><th>Room</th><th>Fees</th><th>Athletic Aid</th><th>Academic Aid</th><th>Net Cost</th></tr></thead>
+          <thead>
+            <tr>
+              <th>School</th>
+              <th>Tuition ($)</th>
+              <th>Room ($)</th>
+              <th>Fees ($)</th>
+              <th>Athletic ($)</th>
+              <th>Academic ($)</th>
+              <th>Direct ($)</th>
+              <th>NIL ($)</th>
+              <th>Total COA</th>
+              <th>Total Aid</th>
+              <th>Net Cost</th>
+            </tr>
+          </thead>
           <tbody></tbody>
         </table>
       </div>
     </div>
 
+    <!-- TAB 3: WEIGHTED SCORECARD -->
     <div id="scorecard" class="tab-pane">
+      <div class="formula-banner">
+        <strong>Weighted Scorecard Formula:</strong><br>
+        <code>Score = (Tech × 25%) + (Opportunity × 25%) + (Finance × 20%) + (Coach × 15%) + (Acad × 15%)</code>
+      </div>
       <div class="table-box">
         <table id="scoreTable">
-          <thead><tr><th>School</th><th>Tech (25%)</th><th>Opportunity (25%)</th><th>Financial (20%)</th><th>Fit Score</th></tr></thead>
+          <thead>
+            <tr>
+              <th>School</th>
+              <th>Tech (25%)</th>
+              <th>Opportunity (25%)</th>
+              <th>Financial (20%)</th>
+              <th>Coaching (15%)</th>
+              <th>Academic (15%)</th>
+              <th>Fit Score</th>
+            </tr>
+          </thead>
           <tbody></tbody>
         </table>
       </div>
     </div>
 
+    <!-- TAB 4: ROSTER TIERS -->
     <div id="tiers" class="tab-pane">
       <div class="table-box">
         <table>
-          <thead><tr><th>Tier</th><th>School</th><th>Conference</th><th>Status</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>School</th>
+              <th>Conf</th>
+              <th>Roster Competition Level</th>
+              <th>Pitching Tech & Contacts</th>
+              <th>Status</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Tier A</td><td><strong>Kansas</strong></td><td>Big 12</td><td>Official Oct 23</td></tr>
-            <tr><td>Tier B</td><td><strong>WKU</strong></td><td>C-USA</td><td>Visited Oct 3</td></tr>
+            <tr><td><span class="badge badge-tier-a">Tier A</span></td><td><strong>Kansas</strong></td><td>Big 12</td><td>High RHP Depth</td><td>TrackMan, Edgertronic, Video Suite</td><td><strong>Official Oct 23</strong></td></tr>
+            <tr><td><span class="badge badge-tier-a">Tier A</span></td><td><strong>Arizona</strong></td><td>Big 12</td><td>High Depth Chart</td><td>Garen Caulfield (Player Dev)</td><td>Active Contact</td></tr>
+            <tr><td><span class="badge badge-tier-a">Tier A</span></td><td><strong>UCF</strong></td><td>Big 12</td><td>Heavy Competition</td><td>Large Baseball Ops Tech</td><td>Active Contact</td></tr>
+            <tr><td><span class="badge badge-tier-a">Tier A</span></td><td><strong>Indiana</strong></td><td>Big Ten</td><td>Crowded RHP Room</td><td>Big Ten Pitching Facility</td><td>Active Contact</td></tr>
+            <tr><td><span class="badge badge-tier-a">Tier A</span></td><td><strong>Penn State</strong></td><td>Big Ten</td><td>Very High Depth</td><td>Ford Ladd (Pitching Tech Dir)</td><td>Active Contact</td></tr>
+            <tr><td><span class="badge badge-tier-b">Tier B</span></td><td><strong>High Point</strong></td><td>Big South</td><td>Moderate (17 spots open)</td><td>Pitching & Analytics Dirs</td><td>Active Contact</td></tr>
+            <tr><td><span class="badge badge-tier-b">Tier B</span></td><td><strong>WKU</strong></td><td>C-USA</td><td>Open Leverage Innings</td><td>Brett Neffendorf (Pitching)</td><td><strong>Visited Oct 3</strong></td></tr>
+            <tr><td><span class="badge badge-tier-b">Tier B</span></td><td><strong>Kent State</strong></td><td>MAC</td><td>Moderate Depth</td><td>Nick Bennett (Pitching Dev)</td><td>Active Contact</td></tr>
+            <tr><td><span class="badge badge-tier-c">Tier C</span></td><td><strong>New Mexico St</strong></td><td>C-USA</td><td>Open Rotation/Bullpen</td><td>JUCO / Upperclass Staff</td><td>Active Contact</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
+    <!-- TAB 5: CHECKLIST -->
+    <div id="checklist" class="tab-pane">
+      <div class="checklist-card">
+        <h3 style="font-size: 16px; margin: 0 0 12px 0; color: var(--navy-dark);">Official Visit Screening Checklist</h3>
+        <div class="checklist-item"><input type="checkbox"> <span>1. <strong>Inning Role:</strong> Weekend starter, midweek, or leverage reliever?</span></div>
+        <div class="checklist-item"><input type="checkbox"> <span>2. <strong>34-Man Spot:</strong> Explicit House settlement roster allocation?</span></div>
+        <div class="checklist-item"><input type="checkbox"> <span>3. <strong>RHP Count:</strong> How many RHPs on depth chart or signing?</span></div>
+        <div class="checklist-item"><input type="checkbox"> <span>4. <strong>Development Goals:</strong> Targeted pitch velocity & spin metrics?</span></div>
+        <div class="checklist-item"><input type="checkbox"> <span>5. <strong>Aid Security:</strong> Full-year athletic scholarship commitment?</span></div>
+        <div class="checklist-item"><input type="checkbox"> <span>6. <strong>NIL Terms:</strong> Signed written contract with collective?</span></div>
+        <div class="checklist-item"><input type="checkbox"> <span>7. <strong>Summer Coverage:</strong> Summer school tuition & housing covered?</span></div>
+        <div class="checklist-item"><input type="checkbox"> <span>8. <strong>Compliance Audit:</strong> JUCO transcript officially evaluated?</span></div>
+        <div class="checklist-item"><input type="checkbox"> <span>9. <strong>40% Rule:</strong> 3rd-year degree progress confirmed?</span></div>
+        <div class="checklist-item"><input type="checkbox"> <span>10. <strong>Documentation:</strong> Written confirmation of all terms?</span></div>
+      </div>
+    </div>
+
+    <!-- TAB 6: PARENT NOTES -->
     <div id="comments" class="tab-pane">
-      <div id="notesContainer"></div>
-      <div style="margin-top:16px; background:#fff; padding:16px; border-radius:12px; border:1px solid var(--border);">
-        <textarea id="noteInput" placeholder="Add parent observations..."></textarea>
-        <button class="btn-primary" style="margin-top:8px;" onclick="addParentNote()">Save Note to Google Sheet</button>
+      <div id="notesContainer">
+        <div class="comment-item">
+          <div class="comment-author"><span>Ken Dooley</span> <span class="comment-date">10/03/2026 — WKU Debrief</span></div>
+          <p style="margin: 0; font-size: 13px;">WKU visit went smoothly. Coach Neffendorf outlined a clear path for Sean to earn high-leverage innings. Need to double-check compliance progress on credit transfer verification.</p>
+        </div>
+        <div class="comment-item">
+          <div class="comment-author"><span>Jodi Dooley</span> <span class="comment-date">10/04/2026 — Kansas Prep</span></div>
+          <p style="margin: 0; font-size: 13px;">For the upcoming Kansas visit on October 23, our primary focus is understanding where Sean fits inside their RHP rotation/bullpen depth. Facility and tech setup are outstanding.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px; background: #ffffff; padding: 16px; border-radius: 12px; border: 1px solid var(--border);">
+        <h4 style="font-size: 14px; margin: 0 0 10px 0; color: var(--navy-dark);">Add New Parent Note</h4>
+        <textarea id="noteInput" placeholder="Type visit observations or questions..." style="margin-bottom: 10px;"></textarea>
+        <button class="btn-primary" onclick="addParentNote()">Save Note to Google Sheet</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxvDFkqtk_VxPUf9-pF9Qy4cNka5yS_-OyWPMlYrya-_HvjZw-NH_UiMpka9eo60Hatmw/exec";
+  const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxvDFkqtk_VxPUf9-pF9Qy4cNka5yS_-OyWPMlYrya-_HvjZw-NH_UiMpka9eo60Hatmw/exec";
 
-  const schools = {
-    "Kansas": { conf: "Big 12", role: "Rotation/Leverage", tuition: 28000, room: 12000, fees: 2000, athAid: 18000, acadAid: 4000, dev: 9.0, opp: 7.0, fin: 8.5 },
-    "WKU": { conf: "C-USA", role: "High-Leverage Reliever", tuition: 22000, room: 9500, fees: 1500, athAid: 15000, acadAid: 4000, dev: 8.0, opp: 9.0, fin: 8.0 }
+  const schoolsData = {
+    "Kansas": {
+      conf: "Big 12", role: "Weekend Rotation Competition / Leverage Reliever", tech: "TrackMan, Edgertronic, High-Speed Video",
+      rosterFit: "High RHP Depth (Harrell, Rahe, Ebel, West)", audit: "Submitted for Oct 23 Visit", status: "Scheduled Official Visit (Oct 23, 2026)",
+      tier: "Tier A — High Platform", tuition: 28000, room: 12000, fees: 2000, athAid: 18000, acadAid: 4000, direct: 2500, nil: 5000,
+      sDev: 9.0, sOpp: 7.0, sFin: 8.5, sCoach: 8.5, sAcad: 8.5
+    },
+    "High Point": {
+      conf: "Big South", role: "Rotation Competition / Late-Inning Leverage", tech: "TrackMan, Edgertronic, Dedicated Analytics Dir",
+      rosterFit: "Balanced Pitching Staff (17 Relief Spots Open)", audit: "Pending Official Audit (40% Rule)", status: "Active Communication",
+      tier: "Tier B — Opportunity + Dev", tuition: 38000, room: 14000, fees: 2500, athAid: 27000, acadAid: 7500, direct: 3000, nil: 2500,
+      sDev: 8.5, sOpp: 8.5, sFin: 8.5, sCoach: 8.5, sAcad: 8.0
+    },
+    "WKU": {
+      conf: "C-USA", role: "High-Leverage Reliever / Starter Competition", tech: "TrackMan, Rapsodo Pitching",
+      rosterFit: "High Portal Turnover (Clear Open Innings)", audit: "Transcript Evaluated / Complete", status: "Completed Official Visit (Oct 3, 2026)",
+      tier: "Tier B — Opportunity + Dev", tuition: 22000, room: 9500, fees: 1500, athAid: 15000, acadAid: 4000, direct: 1500, nil: 2000,
+      sDev: 8.0, sOpp: 9.0, sFin: 8.0, sCoach: 8.5, sAcad: 8.5
+    },
+    "Arizona": {
+      conf: "Big 12", role: "Power-Arm Development / Weekend Leverage", tech: "Full D1 Tech Suite / Player Dev Director",
+      rosterFit: "High Depth (Public Roster Needs Confirmation)", audit: "Pending Transcript Evaluation", status: "Active Communication",
+      tier: "Tier A — High Platform", tuition: 37000, room: 13000, fees: 2200, athAid: 20000, acadAid: 5000, direct: 3000, nil: 6000,
+      sDev: 9.0, sOpp: 7.0, sFin: 8.0, sCoach: 8.5, sAcad: 8.0
+    },
+    "UCF": {
+      conf: "Big 12", role: "Late-Inning Power Arm / Rotation Competition", tech: "Large Baseball Operation Tech Suite",
+      rosterFit: "Crowded RHP Room (Kimball, Schoneboom, etc.)", audit: "Pending Transcript Audit", status: "Active Communication",
+      tier: "Tier A — High Platform", tuition: 24000, room: 11500, fees: 1800, athAid: 15000, acadAid: 3000, direct: 2000, nil: 4000,
+      sDev: 9.0, sOpp: 7.0, sFin: 8.0, sCoach: 8.0, sAcad: 8.0
+    },
+    "Indiana": {
+      conf: "Big Ten", role: "Bullpen Leverage / Rotation Competition", tech: "Big Ten Pitching Facility & Tech",
+      rosterFit: "Large RHP Depth (Walker, Dubie, Sullivan)", audit: "Pending Transcript Audit", status: "Active Communication",
+      tier: "Tier A — High Platform", tuition: 36000, room: 12500, fees: 2100, athAid: 20000, acadAid: 5000, direct: 2500, nil: 4000,
+      sDev: 8.5, sOpp: 6.0, sFin: 8.0, sCoach: 8.0, sAcad: 8.5
+    },
+    "Kent State": {
+      conf: "MAC", role: "Rotation Competition / High Inning Volume", tech: "Pitching Development Director (Nick Bennett)",
+      rosterFit: "Moderate RHP Competition (Tumis, Wentz)", audit: "Pending Transcript Audit", status: "Active Communication",
+      tier: "Tier B — Opportunity + Dev", tuition: 21000, room: 10000, fees: 1600, athAid: 15000, acadAid: 4000, direct: 1500, nil: 2000,
+      sDev: 8.5, sOpp: 8.0, sFin: 7.5, sCoach: 8.0, sAcad: 8.0
+    },
+    "New Mexico State": {
+      conf: "C-USA", role: "Rotation Candidate / Substantial Innings", tech: "D1 Pitching Infrastructure",
+      rosterFit: "Mixed Upperclass/JUCO Staff (Clear Pathway)", audit: "Pending Transcript Audit", status: "Active Communication",
+      tier: "Tier C — Opportunity / Value", tuition: 20000, room: 9000, fees: 1400, athAid: 16000, acadAid: 3500, direct: 1500, nil: 1500,
+      sDev: 7.5, sOpp: 8.5, sFin: 7.5, sCoach: 7.5, sAcad: 8.0
+    },
+    "Penn State": {
+      conf: "Big Ten", role: "Technology-Driven Dev / Bullpen-to-Rotation", tech: "Director of Pitching Technology (Ford Ladd)",
+      rosterFit: "Extremely Crowded RHP Depth Chart", audit: "Pending Transcript Audit", status: "Active Communication",
+      tier: "Tier A — High Platform", tuition: 38000, room: 13000, fees: 2300, athAid: 22000, acadAid: 5000, direct: 2500, nil: 5000,
+      sDev: 8.5, sOpp: 5.5, sFin: 8.0, sCoach: 8.0, sAcad: 8.5
+    }
   };
 
   function switchTab(e, tabId) {
@@ -153,39 +491,175 @@
     e.currentTarget.classList.add('active');
   }
 
-  function renderCard(sKey) {
-    const d = schools[sKey];
+  function renderCard(schoolKey) {
+    const d = schoolsData[schoolKey];
     const coa = d.tuition + d.room + d.fees;
-    const aid = d.athAid + d.acadAid;
-    return `<div class="card-header"><h3>${sKey} (${d.conf})</h3></div><div class="card-body"><div class="metric-row"><span>Role:</span><strong>${d.role}</strong></div><div class="metric-row"><span>Net Cost:</span><strong>$${(coa - aid).toLocaleString()}</strong></div></div>`;
+    const aid = d.athAid + d.acadAid + d.direct + d.nil;
+    const net = coa - aid;
+    const score = (d.sDev * 0.25) + (d.sOpp * 0.25) + (d.sFin * 0.20) + (d.sCoach * 0.15) + (d.sAcad * 0.15);
+
+    return `
+      <div class="card-header">
+        <span class="conf-pill">${d.conf}</span>
+        <h3>${schoolKey}</h3>
+        <div style="font-size: 11px; color: #93c5fd; font-weight: 600;">${d.tier} • ${d.status}</div>
+      </div>
+      <div class="card-body">
+        <div class="metric-row"><span class="metric-label">Projected Role:</span><span class="metric-val" style="color: #2563eb;">${d.role}</span></div>
+        <div class="metric-row"><span class="metric-label">Pitching Tech:</span><span class="metric-val">${d.tech}</span></div>
+        <div class="metric-row"><span class="metric-label">Roster Depth:</span><span class="metric-val">${d.rosterFit}</span></div>
+        <div class="metric-row"><span class="metric-label">Degree Audit:</span><span class="metric-val">${d.audit}</span></div>
+        <div class="metric-row"><span class="metric-label">Total COA:</span><span class="metric-val">$${coa.toLocaleString()}</span></div>
+        <div class="metric-row"><span class="metric-label">Total Aid + NIL:</span><span class="metric-val" style="color: #16a34a;">-$${aid.toLocaleString()}</span></div>
+        <div class="metric-row"><span class="metric-label">Net Out-of-Pocket:</span><span class="metric-val" style="font-size: 15px; color: #1e3a8a;">$${net.toLocaleString()} / yr</span></div>
+        <div class="metric-row"><span class="metric-label">Weighted Score:</span><span class="metric-val" style="font-size: 15px; color: #d97706;">${score.toFixed(2)} / 10.0</span></div>
+      </div>
+    `;
   }
 
   function updateComparison() {
-    document.getElementById('card1').innerHTML = renderCard(document.getElementById('schoolSelect1').value);
-    document.getElementById('card2').innerHTML = renderCard(document.getElementById('schoolSelect2').value);
+    const s1 = document.getElementById('schoolSelect1').value;
+    const s2 = document.getElementById('schoolSelect2').value;
+    document.getElementById('card1').innerHTML = renderCard(s1);
+    document.getElementById('card2').innerHTML = renderCard(s2);
+  }
+
+  function populateFinancialTable() {
+    const tbody = document.querySelector('#finTable tbody');
+    tbody.innerHTML = '';
+    for (let key in schoolsData) {
+      const d = schoolsData[key];
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>${key} (${d.conf})</strong></td>
+        <td><input type="number" class="f-tui" value="${d.tuition}" oninput="calcFinRow(this)"></td>
+        <td><input type="number" class="f-rm" value="${d.room}" oninput="calcFinRow(this)"></td>
+        <td><input type="number" class="f-fee" value="${d.fees}" oninput="calcFinRow(this)"></td>
+        <td><input type="number" class="f-ath" value="${d.athAid}" oninput="calcFinRow(this)"></td>
+        <td><input type="number" class="f-acad" value="${d.acadAid}" oninput="calcFinRow(this)"></td>
+        <td><input type="number" class="f-dir" value="${d.direct}" oninput="calcFinRow(this)"></td>
+        <td><input type="number" class="f-nil" value="${d.nil}" oninput="calcFinRow(this)"></td>
+        <td class="res-coa" style="font-weight:700;">$0</td>
+        <td class="res-aid" style="font-weight:700; color:#16a34a;">$0</td>
+        <td class="res-net" style="font-weight:800; color:#1e3a8a;">$0</td>
+      `;
+      tbody.appendChild(row);
+      calcFinRow(row.querySelector('.f-tui'));
+    }
+  }
+
+  function calcFinRow(inputEl) {
+    const tr = inputEl.closest('tr');
+    const tui = parseFloat(tr.querySelector('.f-tui').value) || 0;
+    const rm = parseFloat(tr.querySelector('.f-rm').value) || 0;
+    const fee = parseFloat(tr.querySelector('.f-fee').value) || 0;
+    const ath = parseFloat(tr.querySelector('.f-ath').value) || 0;
+    const acad = parseFloat(tr.querySelector('.f-acad').value) || 0;
+    const dir = parseFloat(tr.querySelector('.f-dir').value) || 0;
+    const nil = parseFloat(tr.querySelector('.f-nil').value) || 0;
+
+    const coa = tui + rm + fee;
+    const aid = ath + acad + dir + nil;
+    const net = coa - aid;
+
+    tr.querySelector('.res-coa').innerText = '$' + coa.toLocaleString();
+    tr.querySelector('.res-aid').innerText = '$' + aid.toLocaleString();
+    tr.querySelector('.res-net').innerText = '$' + net.toLocaleString();
+  }
+
+  function populateScoreTable() {
+    const tbody = document.querySelector('#scoreTable tbody');
+    tbody.innerHTML = '';
+    for (let key in schoolsData) {
+      const d = schoolsData[key];
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>${key}</strong></td>
+        <td><input type="number" class="s-dev" value="${d.sDev}" step="0.1" max="10" min="1" oninput="calcScoreRow(this)"></td>
+        <td><input type="number" class="s-opp" value="${d.sOpp}" step="0.1" max="10" min="1" oninput="calcScoreRow(this)"></td>
+        <td><input type="number" class="s-fin" value="${d.sFin}" step="0.1" max="10" min="1" oninput="calcScoreRow(this)"></td>
+        <td><input type="number" class="s-coach" value="${d.sCoach}" step="0.1" max="10" min="1" oninput="calcScoreRow(this)"></td>
+        <td><input type="number" class="s-acad" value="${d.sAcad}" step="0.1" max="10" min="1" oninput="calcScoreRow(this)"></td>
+        <td class="res-score" style="font-weight:800; color:#d97706;">0.00</td>
+      `;
+      tbody.appendChild(row);
+      calcScoreRow(row.querySelector('.s-dev'));
+    }
+  }
+
+  function calcScoreRow(inputEl) {
+    const tr = inputEl.closest('tr');
+    const dev = parseFloat(tr.querySelector('.s-dev').value) || 0;
+    const opp = parseFloat(tr.querySelector('.s-opp').value) || 0;
+    const fin = parseFloat(tr.querySelector('.s-fin').value) || 0;
+    const coach = parseFloat(tr.querySelector('.s-coach').value) || 0;
+    const acad = parseFloat(tr.querySelector('.s-acad').value) || 0;
+
+    const total = (dev * 0.25) + (opp * 0.25) + (fin * 0.20) + (coach * 0.15) + (acad * 0.15);
+    tr.querySelector('.res-score').innerText = total.toFixed(2) + ' / 10.0';
   }
 
   async function addParentNote() {
     const text = document.getElementById('noteInput').value;
-    if (!text) return;
-    await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "note", author: "Ken & Jodi Dooley", date: new Date().toLocaleDateString(), text: text }) });
+    if (!text.trim()) return;
+
+    const author = "Ken & Jodi Dooley";
+    const dateStr = new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+
+    const div = document.createElement('div');
+    div.className = 'comment-item';
+    div.innerHTML = `<div class="comment-author"><span>${author}</span> <span class="comment-date">${dateStr}</span></div><p style="margin: 0; font-size: 13px;">${text}</p>`;
+    document.getElementById('notesContainer').appendChild(div);
     document.getElementById('noteInput').value = '';
-    loadNotes();
-  }
 
-  async function loadNotes() {
     try {
-      const res = await fetch(SCRIPT_URL);
-      const data = await res.json();
-      const container = document.getElementById('notesContainer');
-      container.innerHTML = '';
-      (data.notes || []).forEach(r => {
-        container.innerHTML += `<div class="comment-item"><div class="comment-author"><span>${r[0]}</span><span>${r[1]}</span></div><p style="margin:4px 0 0 0;">${r[2]}</p></div>`;
+      document.getElementById('syncStatus').innerText = "Syncing note to Google Sheet...";
+      await fetch(GOOGLE_SHEET_API_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "note",
+          author: author,
+          date: dateStr,
+          text: text
+        })
       });
-    } catch(e) {}
+      document.getElementById('syncStatus').innerText = "Connected & Synced to Google Sheet";
+    } catch(err) {
+      console.error("Sync error:", err);
+      document.getElementById('syncStatus').innerText = "Saved locally (Offline)";
+    }
   }
 
-  window.onload = () => { updateComparison(); loadNotes(); };
+  async function loadSavedDataFromSheet() {
+    try {
+      const response = await fetch(GOOGLE_SHEET_API_URL);
+      const data = await response.json();
+
+      if (data.notes && data.notes.length > 0) {
+        const notesContainer = document.getElementById('notesContainer');
+        data.notes.forEach(row => {
+          if (row.length >= 3 && row[0] && row[2]) {
+            const div = document.createElement('div');
+            div.className = 'comment-item';
+            div.innerHTML = `<div class="comment-author"><span>${row[0]}</span> <span class="comment-date">${row[1]}</span></div><p style="margin: 0; font-size: 13px;">${row[2]}</p>`;
+            notesContainer.appendChild(div);
+          }
+        });
+      }
+    } catch (err) {
+      console.log("Using standard baseline data while loading Sheet connection...");
+    }
+  }
+
+  window.onload = function() {
+    updateComparison();
+    populateFinancialTable();
+    populateScoreTable();
+    loadSavedDataFromSheet();
+  };
 </script>
+
 </body>
 </html>
