@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sean Dooley — D1 Baseball Recruiting Portal</title>
+<style>
+  :root {
+    --navy-dark: #0f172a;
+    --navy-primary: #1e3a8a;
+    --blue-accent: #2563eb;
+    --gold-accent: #d97706;
+    --gold-light: #fef3c7;
+    --green-accent: #16a34a;
+    --bg-main: #f8fafc;
+    --border: #cbd5e1;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+  }
+  html, body { width: 100%; min-height: 100vh; margin: 0; padding: 0; background-color: var(--bg-main); color: var(--text-dark); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  * { box-sizing: border-box; }
+  .app-container { width: 100%; max-width: 1200px; margin: 0 auto; min-height: 1400px; padding-bottom: 50px; }
+  .hero-header { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #fff; padding: 20px 16px; }
+  .player-title h1 { font-size: 22px; font-weight: 800; margin: 0 0 4px 0; color: #fff; }
+  .player-title p { margin: 0; font-size: 13px; color: #93c5fd; }
+  .hero-badge { display: inline-block; margin-top: 10px; background: var(--gold-accent); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+  .stat-ribbon { background: #1e293b; padding: 12px 16px; border-bottom: 3px solid var(--blue-accent); }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; }
+  .stat-item { background: rgba(255,255,255,0.08); padding: 8px; border-radius: 6px; text-align: center; }
+  .stat-val { font-size: 16px; font-weight: 800; color: #38bdf8; }
+  .stat-lbl { font-size: 10px; text-transform: uppercase; color: #cbd5e1; font-weight: 600; }
+  .nav-tabs-wrapper { background: #fff; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; }
+  .nav-tabs { display: flex; overflow-x: auto; padding: 8px 12px; gap: 8px; }
+  .tab-btn { padding: 10px 16px; background: #f1f5f9; border: 1px solid var(--border); border-radius: 20px; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; white-space: nowrap; }
+  .tab-btn.active { background: var(--navy-primary); color: #fff; border-color: var(--navy-primary); }
+  .content-body { padding: 16px; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+  select, input[type="number"], textarea { font-size: 16px !important; border: 1px solid var(--border); border-radius: 8px; padding: 10px; width: 100%; background: #fff; }
+  .compare-controls { background: #fff; padding: 16px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px; }
+  .compare-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 768px) { .compare-grid { grid-template-columns: 1fr 1fr; } }
+  .school-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .card-header { padding: 14px 16px; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: #fff; }
+  .card-body { padding: 14px 16px; }
+  .metric-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+  .table-box { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; margin-bottom: 16px; }
+  table { width: 100%; min-width: 650px; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--navy-dark); color: #fff; padding: 10px 12px; text-align: left; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .comment-item { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+  .comment-author { font-size: 12px; font-weight: 700; color: var(--navy-primary); display: flex; justify-content: space-between; }
+  .btn-primary { background: var(--navy-primary); color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: 700; width: 100%; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <div class="hero-header">
+    <div class="player-title">
+      <h1>Sean Dooley — D1 Portal</h1>
+      <p>JUCO RHP | Class of 2027 | 94 MPH / 2,200+ RPM</p>
+      <div style="font-size:11px; color:#93c5fd; margin-top:4px;">● Connected to Master Google Sheet</div>
+    </div>
+    <div class="hero-badge">⚾ 9 Active D1 Programs • Kansas Official Oct 23</div>
+  </div>
+
+  <div class="stat-ribbon">
+    <div class="stat-grid">
+      <div class="stat-item"><div class="stat-val">94 MPH</div><div class="stat-lbl">Top Velo</div></div>
+      <div class="stat-item"><div class="stat-val">2,200+</div><div class="stat-lbl">Spin RPM</div></div>
+      <div class="stat-item"><div class="stat-val">34</div><div class="stat-lbl">House Cap</div></div>
+      <div class="stat-item"><div class="stat-val">40%</div><div class="stat-lbl">Degree Audit</div></div>
+    </div>
+  </div>
+
+  <div class="nav-tabs-wrapper">
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab(event, 'compare')">1. Comparison</button>
+      <button class="tab-btn" onclick="switchTab(event, 'calc')">2. Financial Calculator</button>
+      <button class="tab-btn" onclick="switchTab(event, 'scorecard')">3. Scorecard</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tiers')">4. Roster Tiers</button>
+      <button class="tab-btn" onclick="switchTab(event, 'comments')">5. Parent Notes</button>
+    </div>
+  </div>
+
+  <div class="content-body">
+    <div id="compare" class="tab-pane active">
+      <div class="compare-controls">
+        <label><strong>School #1:</strong></label>
+        <select id="schoolSelect1" onchange="updateComparison()"><option value="Kansas">Kansas (Big 12)</option><option value="WKU">WKU (C-USA)</option></select>
+        <label style="margin-top:8px; display:block;"><strong>School #2:</strong></label>
+        <select id="schoolSelect2" onchange="updateComparison()"><option value="WKU">WKU (C-USA)</option><option value="Kansas">Kansas (Big 12)</option></select>
+      </div>
+      <div class="compare-grid">
+        <div class="school-card" id="card1"></div>
+        <div class="school-card" id="card2"></div>
+      </div>
+    </div>
+
+    <div id="calc" class="tab-pane">
+      <div class="table-box">
+        <table id="finTable">
+          <thead><tr><th>School</th><th>Tuition</th><th>Room</th><th>Fees</th><th>Athletic Aid</th><th>Academic Aid</th><th>Net Cost</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="scorecard" class="tab-pane">
+      <div class="table-box">
+        <table id="scoreTable">
+          <thead><tr><th>School</th><th>Tech (25%)</th><th>Opportunity (25%)</th><th>Financial (20%)</th><th>Fit Score</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tiers" class="tab-pane">
+      <div class="table-box">
+        <table>
+          <thead><tr><th>Tier</th><th>School</th><th>Conference</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Tier A</td><td><strong>Kansas</strong></td><td>Big 12</td><td>Official Oct 23</td></tr>
+            <tr><td>Tier B</td><td><strong>WKU</strong></td><td>C-USA</td><td>Visited Oct 3</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="comments" class="tab-pane">
+      <div id="notesContainer"></div>
+      <div style="margin-top:16px; background:#fff; padding:16px; border-radius:12px; border:1px solid var(--border);">
+        <textarea id="noteInput" placeholder="Add parent observations..."></textarea>
+        <button class="btn-primary" style="margin-top:8px;" onclick="addParentNote()">Save Note to Google Sheet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxvDFkqtk_VxPUf9-pF9Qy4cNka5yS_-OyWPMlYrya-_HvjZw-NH_UiMpka9eo60Hatmw/exec";
+
+  const schools = {
+    "Kansas": { conf: "Big 12", role: "Rotation/Leverage", tuition: 28000, room: 12000, fees: 2000, athAid: 18000, acadAid: 4000, dev: 9.0, opp: 7.0, fin: 8.5 },
+    "WKU": { conf: "C-USA", role: "High-Leverage Reliever", tuition: 22000, room: 9500, fees: 1500, athAid: 15000, acadAid: 4000, dev: 8.0, opp: 9.0, fin: 8.0 }
+  };
+
+  function switchTab(e, tabId) {
+    document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    e.currentTarget.classList.add('active');
+  }
+
+  function renderCard(sKey) {
+    const d = schools[sKey];
+    const coa = d.tuition + d.room + d.fees;
+    const aid = d.athAid + d.acadAid;
+    return `<div class="card-header"><h3>${sKey} (${d.conf})</h3></div><div class="card-body"><div class="metric-row"><span>Role:</span><strong>${d.role}</strong></div><div class="metric-row"><span>Net Cost:</span><strong>$${(coa - aid).toLocaleString()}</strong></div></div>`;
+  }
+
+  function updateComparison() {
+    document.getElementById('card1').innerHTML = renderCard(document.getElementById('schoolSelect1').value);
+    document.getElementById('card2').innerHTML = renderCard(document.getElementById('schoolSelect2').value);
+  }
+
+  async function addParentNote() {
+    const text = document.getElementById('noteInput').value;
+    if (!text) return;
+    await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "note", author: "Ken & Jodi Dooley", date: new Date().toLocaleDateString(), text: text }) });
+    document.getElementById('noteInput').value = '';
+    loadNotes();
+  }
+
+  async function loadNotes() {
+    try {
+      const res = await fetch(SCRIPT_URL);
+      const data = await res.json();
+      const container = document.getElementById('notesContainer');
+      container.innerHTML = '';
+      (data.notes || []).forEach(r => {
+        container.innerHTML += `<div class="comment-item"><div class="comment-author"><span>${r[0]}</span><span>${r[1]}</span></div><p style="margin:4px 0 0 0;">${r[2]}</p></div>`;
+      });
+    } catch(e) {}
+  }
+
+  window.onload = () => { updateComparison(); loadNotes(); };
+</script>
+</body>
+</html>
